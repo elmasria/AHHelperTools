@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>Ahmad El Masri</authors>
+    <owners>Ahmad El Masri</owners>
+    <licenseUrl>https://raw.githubusercontent.com/elmasria/AHHelperTools/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/elmasria/AHHelperTools</projectUrl>
+    <iconUrl>https://raw.githubusercontent.com/elmasria/AHHelperTools/master/assets/icons/helper-tool.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes>
+      New helper features such ad convert string to `guid`, `int`, .. in an easy way
+    </releaseNotes>
+    <copyright>Copyright 2018</copyright>
+    <tags>logs helper log</tags>
+  </metadata>
+</package>
