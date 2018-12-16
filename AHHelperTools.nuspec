@@ -12,9 +12,10 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
     <releaseNotes>
-      New helper features such ad convert string to `guid`, `int`, .. in an easy way
+      add get client ip address method
+      change helper class to AHHelper 
     </releaseNotes>
     <copyright>Copyright 2018</copyright>
-    <tags>logs helper log</tags>
+    <tags>logs helper log IP</tags>
   </metadata>
 </package>
