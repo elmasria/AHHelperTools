@@ -1,17 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AHHelperTools
 {
     public static class AHHelpers
     {
-        private const string HttpContext = "MS_HttpContext";
-        private const string RemoteEndpointMessage = "System.ServiceModel.Channels.RemoteEndpointMessageProperty";
-
+        
         public static Guid[] GetGuids(this string idsStr)
         {
             string[] split = idsStr.Split('|');
@@ -84,32 +79,5 @@ namespace AHHelperTools
             }
         }
 
-        /// <summary>
-        /// get client IP
-        /// </summary>
-        /// <param name="request"></param>
-        /// <returns>string: client IP</returns>
-        public static string GetClientIpAddress(this HttpRequestMessage request)
-        {
-            if (request.Properties.ContainsKey(HttpContext))
-            {
-                dynamic ctx = request.Properties[HttpContext];
-                if (ctx != null)
-                {
-                    return ctx.Request.UserHostAddress;
-                }
-            }
-
-            if (request.Properties.ContainsKey(RemoteEndpointMessage))
-            {
-                dynamic remoteEndpoint = request.Properties[RemoteEndpointMessage];
-                if (remoteEndpoint != null)
-                {
-                    return remoteEndpoint.Address;
-                }
-            }
-
-            return null;
-        }
     }
 }

@@ -12,10 +12,9 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
     <releaseNotes>
-      add get client ip address method
-      change helper class to AHHelper 
+      Call web api using Post or Get. Restructure to the GetClientIpAddress
     </releaseNotes>
     <copyright>Copyright 2018</copyright>
-    <tags>logs helper log IP</tags>
+    <tags>logs helper log IP webapi</tags>
   </metadata>
 </package>
