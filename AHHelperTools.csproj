@@ -41,7 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AHlogs.cs" />
+    <Compile Include="AHLogs.cs" />
     <Compile Include="AHHelpers.cs" />
     <Compile Include="AHNetwork.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
