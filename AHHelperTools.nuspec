@@ -12,9 +12,9 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
     <releaseNotes>
-      Call web api using Post or Get. Restructure to the GetClientIpAddress
+      Add additional Logs functionality. Update log class Name (AHLogs) and methods Name (Log)
     </releaseNotes>
     <copyright>Copyright 2018</copyright>
-    <tags>logs helper log IP webapi</tags>
+    <tags>logs helper log IP webapi exceptions</tags>
   </metadata>
 </package>
