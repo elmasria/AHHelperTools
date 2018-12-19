@@ -12,7 +12,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
     <releaseNotes>
-      Add additional Logs functionality. Update log class Name (AHLogs) and methods Name (Log)
+      Add detailed response for CallWebAPi function (status code, description)
     </releaseNotes>
     <copyright>Copyright 2018</copyright>
     <tags>logs helper log IP webapi exceptions</tags>
