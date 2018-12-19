@@ -44,6 +44,7 @@
     <Compile Include="AHLogs.cs" />
     <Compile Include="AHHelpers.cs" />
     <Compile Include="AHNetwork.cs" />
+    <Compile Include="DTOs\WebAPIResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

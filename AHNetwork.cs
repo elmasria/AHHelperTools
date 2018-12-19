@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AHHelperTools.DTOs;
+using System;
 using System.IO;
 using System.Net;
 using System.Net.Http;
@@ -66,14 +67,23 @@ namespace AHHelperTools
                     {
                         using (StreamReader responseReader = new StreamReader(webStream))
                         {
-                            return responseReader.ReadToEnd();
+                            string result = responseReader.ReadToEnd();
+                            webResponse.Close();
+                            return result;
                         }
                     }
+                    webResponse.Close();
                     return string.Empty;
                 }
             }
+            catch (WebException e)
+            {
+                AHLogs.Log("WebException", e);
+                return e.Message;
+            }
             catch (Exception e)
             {
+                AHLogs.Log("Exception", e);
                 return e.Message;
             }
         }
@@ -97,15 +107,128 @@ namespace AHHelperTools
                     {
                         using (StreamReader responseReader = new StreamReader(webStream))
                         {
-                            return responseReader.ReadToEnd();
+                            string result = responseReader.ReadToEnd();
+                            webResponse.Close();
+                            return result;
                         }
                     }
+                    webResponse.Close();
                     return string.Empty;
                 }
             }
+            catch (WebException e)
+            {
+                AHLogs.Log("WebException", e);
+                return e.Message;
+            }
             catch (Exception e)
             {
+                AHLogs.Log("Exception", e);
                 return e.Message;
+            }
+        }
+
+        /// <summary>
+        /// Calling a web api using Get method
+        /// return more details
+        /// </summary>
+        /// <param name="URL"></param>
+        /// <param name="Result"></param>
+        public static void CallWebAPIGET(string URL, out WebAPIResult Result)
+        {
+            Result = new WebAPIResult();
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(URL);
+            request.Method = "GET";
+            request.ContentType = "application/json";
+            try
+            {
+                HttpWebResponse webResponse = request.GetResponse() as HttpWebResponse;
+                Result.StatusCode = webResponse.StatusCode;
+
+                using (Stream webStream = webResponse.GetResponseStream())
+                {
+                    if (webStream != null)
+                    {
+                        using (StreamReader responseReader = new StreamReader(webStream))
+                        {
+                            Result.Data = responseReader.ReadToEnd();
+                        }
+                    }
+                    else
+                    {
+                        Result.Description = HttpStatusCode.NoContent.ToString();
+                    }
+                }
+                webResponse.Close();
+            }
+            catch (WebException e)
+            {
+                HttpWebResponse errorResponse = e.Response as HttpWebResponse;
+                Result.StatusCode = errorResponse.StatusCode;
+                if (errorResponse.StatusCode != HttpStatusCode.NotFound)
+                {
+                    Result.Description = e.Status + " - " + e.Message;
+                    AHLogs.Log("WebException - " + e.Status, e);
+                }
+
+            }
+            catch (Exception e)
+            {
+                Result.StatusCode = HttpStatusCode.InternalServerError;
+                Result.Description = e.Message;
+                AHLogs.Log("Exception", e);
+            }
+        }
+
+        public static void CallWebAPIPOST(string URL, string DATA, out WebAPIResult Result)
+        {
+            Result = new WebAPIResult();
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(URL);
+            request.Method = "POST";
+            request.ContentType = "application/json";
+            byte[] bdata = Encoding.UTF8.GetBytes(DATA);
+            request.ContentLength = bdata.Length;
+            using (Stream webStream = request.GetRequestStream())
+            {
+                webStream.Write(bdata, 0, bdata.Length);
+                webStream.Close();
+            }
+            try
+            {
+                HttpWebResponse webResponse = request.GetResponse() as HttpWebResponse;
+                Result.StatusCode = webResponse.StatusCode;
+                using (Stream webStream = webResponse.GetResponseStream())
+                {
+                    if (webStream != null)
+                    {
+                        using (StreamReader responseReader = new StreamReader(webStream))
+                        {
+                            Result.Data = responseReader.ReadToEnd();
+                        }
+                    }
+                    else
+                    {
+                        Result.Description = HttpStatusCode.NoContent.ToString();
+                    }
+                    webResponse.Close();
+                }
+            }
+            catch (WebException e)
+            {
+                HttpWebResponse errorResponse = e.Response as HttpWebResponse;
+                Result.StatusCode = errorResponse.StatusCode;
+                if (errorResponse.StatusCode != HttpStatusCode.NotFound)
+                {
+                    Result.Description = e.Status + " - " + e.Message;
+                    AHLogs.Log("WebException - " + e.Status, e);
+                }
+
+            }
+            catch (Exception e)
+            {
+                Result.StatusCode = HttpStatusCode.InternalServerError;
+                Result.Description = e.Message;
+                AHLogs.Log("Exception", e);
             }
         }
     }
